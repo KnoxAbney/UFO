@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-// Presents game and prompts and saves P1's passcode ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Presents game and prompts and saves P1's passcode ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 std::string setup()
 {
   // I don't want to write std 5 times.
@@ -12,9 +12,10 @@ std::string setup()
   cout << "Welcome to UFO Invasion!\n";
   cout << "In this game, Player 1 will create a passcode for Player 2 to guess letters from.";
   cout << "Each letter Player 2 guesses correctly will be shown in the passcode. For each incorrect guess, Player 2 will get closer to abduction.";
-  cout << "Player 1 wins after 6 incorrect guesses. Player 2 wins if they fill in the passcode.";
+  cout << "Player 1 wins after 6 incorrect guesses. Player 2 wins if they fill in the passcode.\n";
   system("sleep 8");
   cout << "Player 1, please enter your passcode:\n";
+  system("sleep 1");
 
   // Passcode input return
   getline(cin,passcode);
@@ -23,8 +24,26 @@ std::string setup()
 }
 
 
+// Single Player setup chooses a random passphrase from 100 prewritten options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  std::string SPSetup()
+  {
+    using namespace std;
+    srand(time(0));
+    int number = rand() % 100;
+    std::vector <string> passcodes = {"congratulation! a winner is you!","hello there","general kenobi","the dude abides","do a kickflip","the dark knight","cinnamon toast crunch","narwhals","sea otter","humpback whale","jeopardy","playstation","grand theft auto","bench press","armadillo","python","anaconda","javascript","education","teacher","firefighter","police officer","letter carrier","senator","accountant","youtube","google","twitch","free climbing","mountain biking","to kill a mockingbird","the scarlett letter","the giver","the big lebowski","the legend of zelda","pirates of the carribean","the shawshank redemption","nucleus","proton","neutron","electron","hydrogen","oxygen","carbon","skateboard","automobile","iron horse","malarkey","balderdash","hogwash","flimflam","orange","purple","lavender","violet","cyan","yellow","red","green","indigo","radiation","alpha","omega","christmas","halloween","thanksgiving","independence","umbrella","camera","telescope","polaris","jupiter","saturn","neptune","earth","venus","mars","mercury","uranus","titan","ganymede","ceres","tulip","sunflower","day lily","daffodil","gardenia","morning glory","hydrangea","pluto","cherry pie","fire of unknown origin","paradise theater","alien","life finds a way","groundhog day","monday","saturday","weekend","evolution"};
+
+    cout << "Welcome to UFO Invasion!\n";
+    cout << "In this game, you will be guessing the letters in an alien passphrase to save yourself from abduction. If you guess all the letters correctly, you win. If you guess incorrectly 6 times, you lose. As you guess letters correctly, they will be entered into the correct place in the hidden word or phrase. The passphrase changes each time you play.\n";
+    cout << "Good luck!\n";
+    system("sleep 8");
+    system("sleep 1");
+    system("clear");
+
+    return passcodes[number];
+  }
+
 // Takes P1's input and transforms it into a vector for easy rewriting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-std::vector <char> P1input(std::string passcode)
+std::vector <char> StringToVector(std::string passcode)
 {
   //initialize
   std::vector <char> output;
@@ -45,7 +64,7 @@ std::vector <char> P1input(std::string passcode)
 }
 
 
-// Test output of passcode with default value ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Test output of passcode with default value ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void testoutput(std::vector <char> output)
 {
 
@@ -56,17 +75,17 @@ void testoutput(std::vector <char> output)
 }
 
 
-// Prompt and write P2 letter guess ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Prompt and write P2 letter guess ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 char P2inp()
 {
   char guess;
-  std::cout << "Player 2, please input your guess:\n";
+  std::cout << "Humans, please input your guess:\n";
   std::cin >> guess;
   return guess;
 }
 
 
-// Check to see if P2's guess was correct ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Check to see if P2's guess was correct ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 bool guesscorrect(char guess, std::string passcode, std::vector <char> output)
 {
   for(int i=0; i<passcode.size(); i++){
@@ -83,7 +102,7 @@ bool guesscorrect(char guess, std::string passcode, std::vector <char> output)
 }
 
 
-// If P2's guess was correct, update vector to display letter placement ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// If P2's guess was correct, update vector to display letter placement ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 std::vector <char> update(char guess, std::string passcode, std::vector <char> output)
 {
   for(int i=0; i<passcode.size(); i++){
@@ -98,7 +117,7 @@ std::vector <char> update(char guess, std::string passcode, std::vector <char> o
 }
 
 
-// Test if game has ended. Display victory message ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Test if game has ended. Display victory message ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 bool endtest(int misses, std::string passcode, std::vector <char> output)
 {
   int wins = 0;
@@ -112,12 +131,12 @@ bool endtest(int misses, std::string passcode, std::vector <char> output)
   }
   if(wins == passcode.size()){
     std::cout << passcode << "\n";
-    std::cout << "Player 2 Wins!";
+    std::cout << "The humans win!";
     return true;
   }
   else if(misses == 6){
     std::cout << passcode << "\n";
-    std::cout << "Player 1 Wins!";
+    std::cout << "The UFO's win!";
     return true;
   }
   else{
@@ -231,5 +250,4 @@ void displaymisses(int misses = 0) {
     std::cout << "         /               \\                   \n";
 
   }
-
 }
