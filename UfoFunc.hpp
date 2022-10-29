@@ -3,7 +3,7 @@
 // So many declarations
 void displaymisses(int misses);
 std::string setup();
-std::vector <char> P1input(std::string passcode);
+std::vector <char> StringToVector(std::string passcode);
 void testoutput(std::vector <char> phrase);
 char P2inp();
 bool guesscorrect(char guess, std::string passcode, std::vector <char> output);
