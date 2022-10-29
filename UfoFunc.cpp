@@ -13,7 +13,7 @@ std::string setup()
   cout << "In this game, Player 1 will create a passcode for Player 2 to guess letters from.";
   cout << "Each letter Player 2 guesses correctly will be shown in the passcode. For each incorrect guess, Player 2 will get closer to abduction.";
   cout << "Player 1 wins after 6 incorrect guesses. Player 2 wins if they fill in the passcode.\n";
-  system("sleep 8");
+  system("sleep 6");
   cout << "Player 1, please enter your passcode:\n";
   system("sleep 1");
 
@@ -35,7 +35,7 @@ std::string setup()
     cout << "Welcome to UFO Invasion!\n";
     cout << "In this game, you will be guessing the letters in an alien passphrase to save yourself from abduction. If you guess all the letters correctly, you win. If you guess incorrectly 6 times, you lose. As you guess letters correctly, they will be entered into the correct place in the hidden word or phrase. The passphrase changes each time you play.\n";
     cout << "Good luck!\n";
-    system("sleep 8");
+    system("sleep 2");
     system("sleep 1");
     system("clear");
 
@@ -65,7 +65,7 @@ std::vector <char> StringToVector(std::string passcode)
 
 
 // Test output of passcode with default value ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void testoutput(std::vector <char> output)
+void printoutput(std::vector <char> output)
 {
 
   for(int i=0; i<output.size(); i++){
@@ -82,6 +82,14 @@ char P2inp()
   std::cout << "Humans, please input your guess:\n";
   std::cin >> guess;
   return guess;
+}
+
+
+// Update guess list with new guesses. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+std::vector <char> GuessesUpdate(char guess, std::vector <char> guesses)
+{
+  guesses.push_back(guess);
+  return guesses;
 }
 
 
