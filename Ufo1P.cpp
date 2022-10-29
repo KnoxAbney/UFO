@@ -12,7 +12,6 @@ int main() {
 
   // Performs main task using functions defined in "UfoFunc.cpp" and declared in UfoFunc.hpp ~~~~~~~~~~~~~~~~~
   while(end != true){
-    int i = 0;
     printoutput(output);
     char guess = P2inp();
     guesses = GuessesUpdate(guess, guesses);
@@ -28,6 +27,5 @@ int main() {
       displaymisses(misses);
     }
     end = endtest(misses, passcode, output);
-    i++;
   }
 }
