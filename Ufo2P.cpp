@@ -11,10 +11,13 @@ int main() {
 
   // Performs main task using functions defined in "UfoFunc.cpp" and declared in UfoFunc.hpp ~~~~~~~~~~~~~~~~~
   while(end != true){
-    testoutput(output);
+    printoutput(output);
     char guess = P2inp();
+    guesses = GuessesUpdate(guess, guesses);
     bool correct = guesscorrect(guess, passcode, output);
     system("clear");
+    std::cout << "Guesses so far:";
+    printoutput(guesses);
     if(correct == true){
       output = update(guess, passcode, output);
     } 
