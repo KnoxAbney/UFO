@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ufo_functions.hpp"
+#include "UfoFunc.hpp"
 
 int main() {
   // initialize necessary vairables
