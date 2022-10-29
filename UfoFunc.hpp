@@ -9,3 +9,4 @@ char P2inp();
 bool guesscorrect(char guess, std::string passcode, std::vector <char> output);
 std::vector <char> update(char guess, std::string passcode, std::vector <char> output);
 bool endtest(int misses, std::string passcode, std::vector <char> output);
+std::string SPSetup();
