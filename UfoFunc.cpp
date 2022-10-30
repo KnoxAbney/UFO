@@ -64,8 +64,19 @@ std::vector <char> StringToVector(std::string passcode)
 }
 
 
-// Test output of passcode with default value ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void printoutput(std::vector <char> output)
+// Test output of passcode ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void printoutput1(std::vector <char> output)
+{
+
+  for(int i=0; i<output.size(); i++){
+    std::cout << output[i];
+  }
+  std::cout << "\n";
+}
+
+
+// Test output of passcode ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void printoutput2(std::vector <std::string> output)
 {
 
   for(int i=0; i<output.size(); i++){
@@ -76,49 +87,63 @@ void printoutput(std::vector <char> output)
 
 
 // Prompt and write P2 letter guess ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-char P2inp()
+std::string P2inp()
 {
-  char guess;
+  std::string guess;
   std::cout << "Humans, please input your guess:\n";
-  std::cin >> guess;
+  getline(std::cin, guess);
   return guess;
 }
 
 
-// Update guess list with new guesses. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-std::vector <char> GuessesUpdate(char guess, std::vector <char> guesses)
+// Update guess list with new guesses. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+std::vector <std::string> GuessesUpdate(std::string guess, std::vector <std::string> guesses)
 {
-  guesses.push_back(guess);
-  return guesses;
+    guesses.push_back(guess);
+    guesses.push_back(", ");
+    return guesses;
 }
 
 
-// Check to see if P2's guess was correct ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bool guesscorrect(char guess, std::string passcode, std::vector <char> output)
+// Check to see if P2's guess was correct for both a single letter and a whole phrase ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool guesscorrect(std::string guess, std::string passcode, std::vector <char> output)
 {
-  for(int i=0; i<passcode.size(); i++){
-    if(guess == passcode[i]){
-      return true;
+  if (guess.size() == 1){
+    for(int i=0; i<passcode.size(); i++){
+      if(guess[0] == passcode[i]){
+        return true;
+      }
+      else if(i+1 == passcode.size()){
+        return false;
+      }
     }
-    else if(i+1 == passcode.size()){
-      return false;
-    }
-    else{
-      continue;
-    }
+  }
+  else{
+      if(guess == passcode){
+        return true;
+      }
+      else if(guess != passcode){
+        return false;
+      }
   }
 }
 
 
 // If P2's guess was correct, update vector to display letter placement ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-std::vector <char> update(char guess, std::string passcode, std::vector <char> output)
+std::vector <char> update(std::string guess, std::string passcode, std::vector <char> output)
 {
-  for(int i=0; i<passcode.size(); i++){
-    if(guess == passcode[i]){
-      output[i] = guess;
+  if(guess.size() == 1){
+    for(int i=0; i<passcode.size(); i++){
+      if(guess[0] == passcode[i]){
+        output[i] = guess[0];
+      }
     }
-    else{
-      continue;
+  }
+  else{
+    std::cout << passcode << "\n";
+    std::cout << "The humans win!";
+    for(int j=0; j<passcode.size(); j++){
+      output[j] = passcode[j];
     }
   }
   return output;
