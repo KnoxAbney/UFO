@@ -26,7 +26,7 @@ int main() {
 
     // Allows for guesses of entire phrase ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if((guess.size() != 1) && (correct == true)){
-      clear;
+      system("clear");
       std::cout << passcode << "\n";
       std::cout << "The humans win!";
       break;
