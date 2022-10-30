@@ -11,13 +11,13 @@ int main() {
   // Chooses random passcode from prewritten set of 100 options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   std::string passcode = setup();
 
-  // Changes passcode to vector that can be rewritten ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Changes passcode to vector, hides letters, and prints ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   std::vector <char> output = StringToVector(passcode);
+  printoutput1(output);
   
 
   // Performs main task using functions defined in "UfoFunc.cpp" and declared in UfoFunc.hpp ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   while(end != true){
-    printoutput1(output);
 
     // Asks for next guess, adds to guess list, and checks for correctness ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     std::string guess = P2inp();
@@ -36,6 +36,7 @@ int main() {
     system("clear");
     std::cout << "Guesses so far:";
     printoutput2(guesses);
+    printoutput1(output);
 
     // checks for correctness and updates output or misses counter accordingly ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if(correct == true){
