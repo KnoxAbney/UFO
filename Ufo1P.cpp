@@ -3,23 +3,28 @@
 
 int main() {
   // initialize necessary vairables
-  std::string passcode = SPSetup();
+  
   int misses = 0;
   bool end = false;
-  std::vector <char> output = StringToVector(passcode);
   std::vector <std::string> guesses = {" "};
+
+  // Chooses random passcode from prewritten set of 100 options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  std::string passcode = SPSetup();
+
+  // Changes passcode to vector that can be rewritten ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  std::vector <char> output = StringToVector(passcode);
   
 
-  // Performs main task using functions defined in "UfoFunc.cpp" and declared in UfoFunc.hpp ~~~~~~~~~~~~~~~~~
+  // Performs main task using functions defined in "UfoFunc.cpp" and declared in UfoFunc.hpp ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   while(end != true){
     printoutput1(output);
 
-    // Asks for next guess, adds to guess list, and checks for correctness ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Asks for next guess, adds to guess list, and checks for correctness ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     std::string guess = P2inp();
     guesses = GuessesUpdate(guess, guesses);
     bool correct = guesscorrect(guess, passcode, output);
 
-    // Allows for guesses of entire phrase ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Allows for guesses of entire phrase ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if((guess.size() != 1) && (correct == true)){
       clear;
       std::cout << passcode << "\n";
@@ -27,12 +32,12 @@ int main() {
       break;
     }
 
-    //clears and resets previous guess printout for next guess ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //clears and resets previous guess printout for next guess ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     system("clear");
     std::cout << "Guesses so far:";
     printoutput2(guesses);
 
-    // checks for correctness and updates output or misses counter accordingly ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // checks for correctness and updates output or misses counter accordingly ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if(correct == true){
       output = update(guess, passcode, output);
     } 
@@ -41,7 +46,7 @@ int main() {
       displaymisses(misses);
     }
     
-    // checks for a win condition and ends the program if one is met ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // checks for a win condition and ends the program if one is met ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     end = endtest(misses, passcode, output);
   }
 }
